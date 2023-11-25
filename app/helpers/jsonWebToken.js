@@ -1,21 +1,27 @@
 const jwt = require('jsonwebtoken');
 const fs = require('fs');
+require('dotenv').config();
 
-const secretKey = fs.readFileSync('jwt.evaluation.key', 'utf8', (err, data) => {
-  if (err) throw err;
-  return data;
-});
+const secretKey = process.env.TOKEN_SECRET;
 
-const generateToken = async (user) => {
-  const token = await jwt.sign(user, secretKey, { expiresIn: '24h' });
+const generateToken = (user) => {
+  const token = jwt.sign(user, secretKey, { expiresIn: '24h' });
 
   return token;
 };
 
-console.log('SECRET KEY', secretKey);
-
 const verifyToken = (token) => {
-  const decoded = jwt.verify(token, secretKey);
+  const decoded = jwt.verify(
+    token,
+    secretKey,
+    (err, decoded) => {
+      if (err) {
+        console.log('ERROR', err);
+        return err;
+      }
+      return decoded;
+    }
+  );
 
   return decoded;
 };

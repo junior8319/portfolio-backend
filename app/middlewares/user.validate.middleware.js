@@ -1,5 +1,4 @@
 const userValidate = async (request, response, next) => {
-  console.log(request.body);
   const { userName, password, role } = request.body;
 
 

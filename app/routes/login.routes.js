@@ -26,7 +26,6 @@ loginRouter.post(
 
 loginRouter.post(
   '/login',
-  loginValidate,
   loginController.login
 );
 

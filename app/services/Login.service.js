@@ -87,8 +87,8 @@ const createUser = async (user) => {
 
 const updateUser = async (id, user) => {
   const userToUpdate = await getUserById(id);
-  let encryptedPassword = ''; 
-  
+  let encryptedPassword = '';
+
   if (!userToUpdate) return null;
 
   if (user.password) {
@@ -121,7 +121,7 @@ const deleteUser = async (id) => {
 const login = async (userName, password) => {
   const user = await getUserByName(userName);
 
-  if (!user) return null;
+  if (!user) return 'User not found';
 
   const match = await bCrypt.compare(password, user.password);
 
@@ -136,7 +136,7 @@ const login = async (userName, password) => {
   if (!token) return null;
 
   delete user.password;
-  
+
   const data = { userData: user, token };
 
   return data;

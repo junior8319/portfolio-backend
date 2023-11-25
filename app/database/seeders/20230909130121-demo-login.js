@@ -2,6 +2,7 @@
 
 /** @type {import('sequelize-cli').Migration} */
 const bcrypt = require('bcrypt');
+require('dotenv').config();
 
 module.exports = {
   async up (queryInterface) {
