@@ -103,6 +103,7 @@ const deleteUser = async (req, res) => {
 };
 
 const login = async (req, res) => {
+  console.log('NO CONTROLLER', req.body);
   try {
     const { userName, password } = req.body;
     const token = await loginService.login(userName, password);
