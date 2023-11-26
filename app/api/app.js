@@ -21,7 +21,7 @@ app.use('/users', loginRouter);
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, '../frontend/src/assets/images');
+    cb(null, './app/public/images');
   },
   filename: function (req, file, cb) {
     cb(null, `${Date.now().toString()}${path.extname(file.originalname)}`);
@@ -39,7 +39,7 @@ app.post('/upload', upload.single('snapshot'), (req, res) => {
 
 app.get('/images/:filename', (req, res) => {
   const { filename } = req.params;
-  const imagePath = path.join(__dirname, `../../../frontend/src/assets/images/${filename}`);
+  const imagePath = path.join(__dirname, `../public/images/${filename}`);
 
   return res.sendFile(imagePath);
 });
@@ -48,9 +48,9 @@ app.delete('/files/delete/:filename', (req, res) => {
   const { filename } = req.params;
 
   if (fs.existsSync(
-    path.join(__dirname, `../../../frontend/src/assets/images/${filename}`)
+    path.join(__dirname, `../public/images/${filename}`)
   )) {
-    fs.unlinkSync(path.join(__dirname, `../../../frontend/src/assets/images/${filename}`));
+    fs.unlinkSync(path.join(__dirname, `../public/images/${filename}`));
 
     return res.status(202).json({
       message: 'File deleted successfully',
