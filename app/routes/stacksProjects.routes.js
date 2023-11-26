@@ -11,7 +11,6 @@ stacksProjectsRouter.get(
 
 stacksProjectsRouter.get(
   '/:stackId/:projectId',
-  tokenValidate,
   stacksProjectsController.getStackProjectByPk
 );
 
