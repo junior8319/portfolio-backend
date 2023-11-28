@@ -6,7 +6,6 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node ./app/api/server.js",
-    "prestart": "npm run build",
     "build": "npm run db:reset",
     "prebuild": "npm install",
     "dev": "nodemon ./app/api/server.js",
