@@ -9,7 +9,9 @@ const {
   stacksProjectsRouter,
   loginRouter,
 } = require('../routes/index.routes');
+const uploadToCloudBucket = require('../helpers/uploadToBucket');
 const app = express();
+require('dotenv').config();
 
 app.use(express.json()); // parse json bodies
 app.use(cors()); // allow all origins
@@ -19,29 +21,23 @@ app.use('/projects', projectsRouter);
 app.use('/stacks-projects', stacksProjectsRouter);
 app.use('/users', loginRouter);
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, './app/public/images');
-  },
-  filename: function (req, file, cb) {
-    cb(null, `${Date.now().toString()}${path.extname(file.originalname)}`);
+const upload = multer({
+  storage: multer.memoryStorage(),
+  limits: {
+    fileSize: 5 * 1024 * 1024,
   },
 });
-
-const upload = multer({ storage });
 
 app.post('/upload', upload.single('snapshot'), (req, res) => {
-  return res.status(200).json({
-    message: 'File uploaded successfully',
-    file: req.file,
-  });
-});
+  if (process.env.NODE_ENV === 'production') {
+    uploadToCloudBucket(req.file);
 
-app.get('/images/:filename', (req, res) => {
-  const { filename } = req.params;
-  const imagePath = path.join(__dirname, `../public/images/${filename}`);
-
-  return res.sendFile(imagePath);
+    return res.status(200).json({
+      message: 'File uploaded successfully!',
+      imageUrl: `https://storage.googleapis.com/antonio-portfolio-bucket/${req.file.filename}`,
+      file: req.file,
+    });
+  }
 });
 
 app.delete('/files/delete/:filename', (req, res) => {
