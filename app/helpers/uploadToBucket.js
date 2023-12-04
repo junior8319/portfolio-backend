@@ -6,7 +6,7 @@ const uploadToCloudBucket = (file) => {
     if (!file) return { status: 400, message: 'No file uploaded.' };
 
     const storage = new Storage({
-      projectId: process.env.GCLOUD_PROJECT_ID,
+      projectId: process.env.GCLOUD_KEY_PROJECT_ID,
       credentials: require(path.join(__dirname, '../api/config/gcloud-credentials.js')),
     });
 
