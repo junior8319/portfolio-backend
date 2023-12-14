@@ -7,19 +7,19 @@ module.exports = {
         allowNull: false,
         primaryKey: true,
         type: Sequelize.INTEGER,
-        references: {
-          model: 'stacks',
-          key: 'id',
-        },
+        // references: {
+        //   model: 'stacks',
+        //   key: 'id',
+        // },
       },
       project_id: {
         allowNull: false,
         primaryKey: true,
         type: Sequelize.INTEGER,
-        references: {
-          model: 'projects',
-          key: 'id',
-        },
+        // references: {
+        //   model: 'projects',
+        //   key: 'id',
+        // },
       },
     });
   },
