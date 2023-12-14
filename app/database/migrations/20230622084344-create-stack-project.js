@@ -6,7 +6,7 @@ module.exports = {
       {
         stack_id: {
           type: Sequelize.INTEGER,
-          allowNull: false,
+          allowNull: true,
           primaryKey: true,
           references: {
             model: {
@@ -17,7 +17,7 @@ module.exports = {
         },
         project_id: {
           type: Sequelize.INTEGER,
-          allowNull: false,
+          allowNull: true,
           primaryKey: true,
           references: {
             model: {
