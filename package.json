@@ -8,6 +8,7 @@
     "start": "node ./app/api/server.js",
     "build": "npm run db:migrate",
     "prebuild": "npm install",
+    "vercel-build": "npm install && npm run db:migrate",
     "dev": "nodemon ./app/api/server.js",
     "db:reset": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
     "db:create": "npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
