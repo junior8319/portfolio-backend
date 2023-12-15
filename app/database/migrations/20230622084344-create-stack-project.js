@@ -8,13 +8,13 @@ module.exports = {
           type: Sequelize.INTEGER,
           allowNull: true,
           primaryKey: true,
-          references: {
-            model: {
-              tableName: 'stacks',
-            },
-            key: 'id',
-            constraints: false,
-          },
+          // references: {
+          //   model: {
+          //     tableName: 'stacks',
+          //   },
+          //   key: 'id',
+          //   constraints: false,
+          // },
         },
         project_id: {
           type: Sequelize.INTEGER,
