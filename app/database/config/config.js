@@ -22,6 +22,7 @@ module.exports = {
     database: process.env.DATABASE,
     host: process.env.HOST,
     dialect: 'mysql',
+    dialectModule: require('mysql2'),
     dialectOptions: {
         ssl: {
             rejectUnauthorized: true,        
