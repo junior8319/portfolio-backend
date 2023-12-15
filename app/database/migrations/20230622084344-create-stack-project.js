@@ -13,6 +13,7 @@ module.exports = {
               tableName: 'stacks',
             },
             key: 'id',
+            constraints: false,
           },
         },
         project_id: {

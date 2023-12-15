@@ -56,6 +56,7 @@ Stack.associate = (models) => {
     {
       through: models.StackProject,
       // foreignKey: 'stackId',
+      constraints: false,
     },
   );
 };
