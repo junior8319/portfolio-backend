@@ -59,7 +59,7 @@ Project.associate = (models) => {
     models.Stack,
     {
       through: models.StackProject,
-      // foreignKey: 'projectId',
+      foreignKey: 'projectId',
       constraints: false,
     },
   );

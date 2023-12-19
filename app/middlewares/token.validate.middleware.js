@@ -7,6 +7,11 @@ const tokenValidate = (req, res, next) => {
   }
   try {
     const decoded = verifyToken(token);
+
+    if (!decoded || decoded.name === 'TokenExpiredError') {
+      return res.status(401).json({ message: 'Token expired.' });
+    }
+
     req.user = decoded;
     next();
   } catch (err) {
