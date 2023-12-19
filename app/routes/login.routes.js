@@ -29,6 +29,11 @@ loginRouter.post(
   loginController.login
 );
 
+loginRouter.post(
+  '/test-is-active',
+  loginController.testTokenIsActive,
+);
+
 loginRouter.put(
   '/:id',
   tokenValidate,
