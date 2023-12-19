@@ -1,5 +1,5 @@
 const { Login } = require('../database/models');
-const { generateToken } = require('../helpers/jsonWebToken');
+const { generateToken, verifyToken } = require('../helpers/jsonWebToken');
 const bCrypt = require('bcrypt');
 
 const getUsers = async () => {
@@ -140,6 +140,14 @@ const login = async (userName, password) => {
   const data = { userData: user, token };
 
   return data;
+};
+
+const testTokenIsActive = async (token) => {
+  const decodedToken = await verifyToken(token);
+
+  if (!decodedToken) return 'Token expired';
+
+  return decodedToken;
 }
 
 module.exports = {
@@ -152,4 +160,5 @@ module.exports = {
   updateUser,
   deleteUser,
   login,
+  testTokenIsActive,
 };
