@@ -15,10 +15,15 @@ const generateToken = (user) => {
 };
 
 const verifyToken = (token) => {
-  token = token.replace('Bearer ', '');
-  const decoded = jwt.verify(token, secretKey);
-
-  return decoded;
+  try {
+    token = token.replace('Bearer ', '');
+    const decoded = jwt.verify(token, secretKey);
+    
+    return decoded;
+  } catch (error) {
+    console.log('ERROR: ', error);
+    return error;
+  }
 };
 
 module.exports = {
