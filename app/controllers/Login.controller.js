@@ -123,7 +123,6 @@ const testTokenIsActive = async (req, res) => {
     const { authorization } = req.headers;
     const token = authorization;
     const tokenIsActive = await loginService.testTokenIsActive(token);
-    console.log('TOKEN IS ACTIVE: ', typeof tokenIsActive);
 
     if (!tokenIsActive || tokenIsActive.message === 'jwt expired') {
       return res.status(401).json({
