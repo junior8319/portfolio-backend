@@ -118,6 +118,25 @@ const login = async (req, res) => {
   }
 };
 
+const testTokenIsActive = async (req, res) => {
+  try {
+    const { authorization } = req.headers;
+    const token = authorization;
+    const tokenIsActive = await loginService.testTokenIsActive(token);
+    console.log('TOKEN IS ACTIVE: ', typeof tokenIsActive);
+
+    if (!tokenIsActive || tokenIsActive.message === 'jwt expired') {
+      return res.status(401).json({
+        message: 'Token expired.',
+      });
+    }
+    return res.status(200).json(tokenIsActive.message);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: 'Internal server error' });
+  }
+};
+
 module.exports = {
   getUsers,
   getUserById,
@@ -125,4 +144,5 @@ module.exports = {
   updateUser,
   deleteUser,
   login,
+  testTokenIsActive,
 };
