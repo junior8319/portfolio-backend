@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./app/api/server.js",
     "build": "npm install",
+    "start": "npm run build && npm run db:reset && node ./app/api/server.js",
     "vercel-build": "npm install && npm install mysql2 --save",
     "dev": "nodemon ./app/api/server.js",
     "db:reset": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
